@@ -15,7 +15,7 @@ module.exports = class extends React.Component {
     error: false
   };
 
-  getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
     return { value: nextProps.value };
   }
 

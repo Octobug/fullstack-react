@@ -1,19 +1,19 @@
-import React from 'react';
-import isEmail from 'validator/lib/isEmail';
+import React from "react";
+import isEmail from "validator/lib/isEmail";
 
-const Field = require('./08-field-component-field.js');
-const CourseSelect = require('./09-course-select.js');
+const Field = require("./08-field-component-field.js");
+const CourseSelect = require("./09-course-select.js");
 
-const content = document.createElement('div');
+const content = document.createElement("div");
 document.body.appendChild(content);
 
 module.exports = class extends React.Component {
-  static displayName = '09-async-fetch';
+  static displayName = "09-async-fetch";
 
   state = {
     fields: {
-      name: '',
-      email: '',
+      name: "",
+      email: "",
       course: null,
       department: null
     },
@@ -32,22 +32,21 @@ module.exports = class extends React.Component {
     this.setState({
       people: people.concat(person),
       fields: {
-        name: '',
-        email: '',
+        name: "",
+        email: "",
         course: null,
         department: null
       }
     });
   };
 
-  onInputChange = ({name, value, error}) => {
+  onInputChange = ({ name, value, error }) => {
     const fields = Object.assign({}, this.state.fields);
     const fieldErrors = Object.assign({}, this.state.fieldErrors);
-
     fields[name] = value;
+    if (name === "department") fields["course"] = null;
     fieldErrors[name] = error;
-
-    this.setState({fields, fieldErrors});
+    this.setState({ fields, fieldErrors });
   };
 
   validate = () => {
@@ -57,8 +56,8 @@ module.exports = class extends React.Component {
 
     if (!person.name) return true;
     if (!person.email) return true;
-    if (!person.course) return true;
     if (!person.department) return true;
+    if (!person.course) return true;
     if (errMessages.length) return true;
 
     return false;
@@ -75,7 +74,7 @@ module.exports = class extends React.Component {
             name="name"
             value={this.state.fields.name}
             onChange={this.onInputChange}
-            validate={val => (val ? false : 'Name Required')}
+            validate={val => (val ? false : "Name Required")}
           />
 
           <br />
@@ -85,7 +84,7 @@ module.exports = class extends React.Component {
             name="email"
             value={this.state.fields.email}
             onChange={this.onInputChange}
-            validate={val => (isEmail(val) ? false : 'Invalid Email')}
+            validate={val => (isEmail(val) ? false : "Invalid Email")}
           />
 
           <br />
@@ -104,8 +103,8 @@ module.exports = class extends React.Component {
         <div>
           <h3>People</h3>
           <ul>
-            {this.state.people.map(({name, email, department, course}, i) => (
-              <li key={i}>{[name, email, department, course].join(' - ')}</li>
+            {this.state.people.map(({ name, email, department, course }, i) => (
+              <li key={i}>{[name, email, department, course].join(" - ")}</li>
             ))}
           </ul>
         </div>
