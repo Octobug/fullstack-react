@@ -3,11 +3,10 @@ import { render } from "react-dom";
 import "./semantic-ui/semantic.min.css";
 import "./index.css";
 
-import Nine from "./09-async-fetch.js";
 import Ten from "./10-remote-persist.js";
 import Eleven from "./11-redux-app.js";
 
-const routes = [Nine, Ten, Eleven];
+const routes = [Ten, Eleven];
 
 const location = window.location;
 window.addEventListener("hashchange", location.reload.bind(location));
