@@ -1,17 +1,20 @@
 import React from "react";
 import { createStore } from "redux";
+import uuid from "uuid";
 
 function reducer(state, action) {
   if (action.type === "ADD_MESSAGE") {
+    const newMessage = {
+      text: action.text,
+      timestamp: Date.now(),
+      id: uuid.v4()
+    };
     return {
-      messages: state.messages.concat(action.message)
+      messages: state.messages.concat(newMessage)
     };
   } else if (action.type === "DELETE_MESSAGE") {
     return {
-      messages: [
-        ...state.messages.slice(0, action.index),
-        ...state.messages.slice(action.index + 1, state.messages.length)
-      ]
+      messages: state.messages.filter(m => m.id !== action.id)
     };
   } else {
     return state;
@@ -77,10 +80,10 @@ class MessageInput extends React.Component {
 }
 
 class MessageView extends React.Component {
-  handleClick = index => {
+  handleClick = id => {
     store.dispatch({
       type: "DELETE_MESSAGE",
-      index: index
+      id: id
     });
   };
 
@@ -89,9 +92,12 @@ class MessageView extends React.Component {
       <div
         className="comment"
         key={index}
-        onClick={() => this.handleClick(index)}
+        onClick={() => this.handleClick(message.id)}
       >
-        {message}
+        <div className="text">
+          {message.text}
+          <span className="metadata">@{message.timestamp}</span>
+        </div>
       </div>
     ));
     return (
