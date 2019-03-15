@@ -177,25 +177,43 @@ class Thread extends React.Component {
   }
 }
 
-class ThreadTabs extends React.Component {
-  handleClick = id => {
-    store.dispatch({
-      type: "OPEN_THREAD",
-      id: id
-    });
-  };
-
-  render() {
-    const tabs = this.props.tabs.map((tab, index) => (
+const Tabs = props => (
+  <div className="ui top attached tabular menu">
+    {props.tabs.map((tab, index) => (
       <div
         key={index}
         className={tab.active ? "active item" : "item"}
-        onClick={() => this.handleClick(tab.id)}
+        onClick={() => props.onClick(tab.id)}
       >
         {tab.title}
       </div>
-    ));
-    return <div className="ui top attached tabular menu">{tabs}</div>;
+    ))}
+  </div>
+);
+
+class ThreadTabs extends React.Component {
+  componentDidMount() {
+    store.subscribe(() => this.forceUpdate());
+  }
+
+  render() {
+    const state = store.getState();
+    const tabs = state.threads.map(t => ({
+      title: t.title,
+      active: t.id === state.activeThreadId,
+      id: t.id
+    }));
+    return (
+      <Tabs
+        tabs={tabs}
+        onClick={id =>
+          store.dispatch({
+            type: "OPEN_THREAD",
+            id: id
+          })
+        }
+      />
+    );
   }
 }
 
