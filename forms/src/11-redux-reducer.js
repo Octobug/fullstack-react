@@ -1,21 +1,24 @@
 import {
-  FETCH_PEOPLE_REQUEST, FETCH_PEOPLE_SUCCESS,
-  SAVE_PEOPLE_REQUEST, SAVE_PEOPLE_FAILURE, SAVE_PEOPLE_SUCCESS
-} from './11-redux-actions.js';
+  FETCH_PEOPLE_REQUEST,
+  FETCH_PEOPLE_SUCCESS,
+  SAVE_PEOPLE_REQUEST,
+  SAVE_PEOPLE_FAILURE,
+  SAVE_PEOPLE_SUCCESS
+} from "./11-redux-actions.js";
 
 const initialState = {
   people: [],
   isLoading: false,
-  saveStatus: 'READY',
+  saveStatus: "READY",
   person: {
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     course: null,
     department: null
-  },
+  }
 };
 
-export function reducer (state = initialState, action) {
+export function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_PEOPLE_REQUEST:
       return Object.assign({}, state, {
@@ -28,22 +31,22 @@ export function reducer (state = initialState, action) {
       });
     case SAVE_PEOPLE_REQUEST:
       return Object.assign({}, state, {
-        saveStatus: 'SAVING'
+        saveStatus: "SAVING"
       });
     case SAVE_PEOPLE_FAILURE:
       return Object.assign({}, state, {
-        saveStatus: 'ERROR'
+        saveStatus: "ERROR"
       });
     case SAVE_PEOPLE_SUCCESS:
       return Object.assign({}, state, {
         people: action.people,
         person: {
-          name: '',
-          email: '',
+          name: "",
+          email: "",
           course: null,
           department: null
         },
-        saveStatus: 'SUCCESS'
+        saveStatus: "SUCCESS"
       });
     default:
       return state;
