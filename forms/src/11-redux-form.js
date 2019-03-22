@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import isEmail from 'validator/lib/isEmail';
+import PropTypes from "prop-types";
+import React from "react";
+import isEmail from "validator/lib/isEmail";
 
-const Field = require('./08-field-component-field.js');
-const CourseSelect = require('./09-course-select.js');
+const Field = require("./08-field-component-field.js");
+const CourseSelect = require("./09-course-select.js");
 
 module.exports = class extends React.Component {
-  static displayName = '11-redux-form';
+  static displayName = "11-redux-form";
 
   static propTypes = {
     people: PropTypes.array.isRequired,
@@ -18,8 +18,8 @@ module.exports = class extends React.Component {
 
   state = {
     fields: this.props.fields || {
-      name: '',
-      email: '',
+      name: "",
+      email: "",
       course: null,
       department: null
     },
@@ -27,9 +27,9 @@ module.exports = class extends React.Component {
   };
 
   getDerivedStateFromProps(update) {
-    console.log('this.props.fields', this.props.fields, update);
+    console.log("this.props.fields", this.props.fields, update);
 
-    return {fields: update.fields};
+    return { fields: update.fields };
   }
 
   onFormSubmit = evt => {
@@ -42,14 +42,14 @@ module.exports = class extends React.Component {
     this.props.onSubmit([...this.props.people, person]);
   };
 
-  onInputChange = ({name, value, error}) => {
+  onInputChange = ({ name, value, error }) => {
     const fields = this.state.fields;
     const fieldErrors = this.state.fieldErrors;
 
     fields[name] = value;
     fieldErrors[name] = error;
 
-    this.setState({fields, fieldErrors});
+    this.setState({ fields, fieldErrors });
   };
 
   validate = () => {
@@ -73,7 +73,7 @@ module.exports = class extends React.Component {
 
     const dirty = Object.keys(this.state.fields).length;
     let status = this.props.saveStatus;
-    if (status === 'SUCCESS' && dirty) status = 'READY';
+    if (status === "SUCCESS" && dirty) status = "READY";
 
     return (
       <div>
@@ -85,7 +85,7 @@ module.exports = class extends React.Component {
             name="name"
             value={this.state.fields.name}
             onChange={this.onInputChange}
-            validate={val => (val ? false : 'Name Required')}
+            validate={val => (val ? false : "Name Required")}
           />
 
           <br />
@@ -95,7 +95,7 @@ module.exports = class extends React.Component {
             name="email"
             value={this.state.fields.email}
             onChange={this.onInputChange}
-            validate={val => (isEmail(val) ? false : 'Invalid Email')}
+            validate={val => (isEmail(val) ? false : "Invalid Email")}
           />
 
           <br />
@@ -133,8 +133,8 @@ module.exports = class extends React.Component {
         <div>
           <h3>People</h3>
           <ul>
-            {this.props.people.map(({name, email, department, course}, i) => (
-              <li key={i}>{[name, email, department, course].join(' - ')}</li>
+            {this.props.people.map(({ name, email, department, course }, i) => (
+              <li key={i}>{[name, email, department, course].join(" - ")}</li>
             ))}
           </ul>
         </div>
