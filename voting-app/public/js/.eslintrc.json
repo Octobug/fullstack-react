@@ -1,9 +1,13 @@
 {
+  "env": {
+    "es6": true,
+    "browser": true
+  },
   "rules": {
-      "no-undef ": "off",
-      "react/prefer-stateless-function": 0,
-      "jsx-a11y/image-has-alt": 0,
-      "prefer-template": 0,
-      "react/no-did-mount-set-state": 0
+    "no-undef ": "off",
+    "react/prefer-stateless-function": 0,
+    "jsx-a11y/image-has-alt": 0,
+    "prefer-template": 0,
+    "react/no-did-mount-set-state": 0
   }
 }
