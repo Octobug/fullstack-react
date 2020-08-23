@@ -3,7 +3,7 @@ class ProductList extends React.Component {
     products: []
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.setState({ products: Seed.products });
   };
 
