@@ -197,8 +197,8 @@ class EditableTimer extends React.Component {
 
 class TimerForm extends React.Component {
   state = {
-    title: this.props.title || "",
-    project: this.props.project || ""
+    title: this.props.title || '',
+    project: this.props.project || ''
   };
 
   handleTitleChange = e => {
@@ -218,7 +218,7 @@ class TimerForm extends React.Component {
   };
 
   render() {
-    const submitText = this.props.id ? "Update" : "Create";
+    const submitText = this.props.title ? "Update" : "Create";
     return (
       <div className="ui centered card">
         <div className="content">
@@ -239,7 +239,7 @@ class TimerForm extends React.Component {
                 onChange={this.handleProjectChange}
               />
             </div>
-            <div className="ui bottom attached buttons">
+            <div className="ui two bottom attached buttons">
               <button
                 className="ui basic blue button"
                 onClick={this.handleSubmit}
